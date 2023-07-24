@@ -1,0 +1,60 @@
+DOCKERFILE
+
+    Es un fichero de tecto utilizado para crear una imagen, se basa en capas, vendria a ser como una receta
+    en la que colocamos todos los ingredientes que queremos que tenga nuestra imagen
+
+CAPAS DEL DOCKERFILE
+
+    FROM: 
+        Esta capa inicia una nueva capa de construccion y establece la imagen base para las instrucciones posteriores.
+        Ej: FROM <image>:[<tag>][AS <name>] --> Esta es una estructura basica de la capa FROM.
+
+        Puede aparecer varias veces dentro de un DOCKERFILE para crear multiples imagenes o crear una etapa de compilacion 
+        como dependencia de otra.
+
+        Se puede asignar un nombre a la etapa de compilacion con la instruccion "as".
+
+        Los "tags" se utilizan para indicar que version de la imagen queremos descargar, si no se le coloca un "tag" se 
+        instala la ultima version disponible (latest).
+    
+    RUN: 
+        Ejecuta un comando en una nueva capa encima de la imagen actual.
+        Ej: RUN <command>
+
+        --> Utiliza shell por defecto en Linux /bin/sh -c o cmd /s /c en Windows
+        --> Los comandos del RUN deben ser desatendidos, o sea que no requieran interactuar con el usuario.
+            Ej: yum -y install
+
+    COPY/ADD:
+        Ambas se utilizan para compiar archivos o directorios dentro del contenedor.
+        Ej: COPY/ADD [--chown=<user>:<group>] <src>... <dest> (source y destiny)
+
+        --> Para Linux se puede pasar el parametro chown.
+        --> La diferencia entre COPY Y ADD es que con ADD se puede copiar un fichero desde una Url, incluso si el src es un 
+            archivo comprimido lo descomprime en el destino.
+
+    ENTRYPOINT
+        Nos permite configurar un contenedor para que sea ejecutable.
+        Ej: ENTRYPOINT ["executable", "param_1", "param_2"]   
+
+    CMD 
+        Se utiliza para levantar el servicio. Debe levantar en primer plano para mantener vivo el contenedor.
+        Ej: CMD ["executable", "param_1", "param_2"]
+    
+        --> Solo puede haber un CMD en el DOCKERFILE, si hay mas solo se ejecuta el ultimo.
+
+    DOCKERIGNORE
+        Por defecto cuando construimos una imagen on DOCKER BUILD todo el contenido del directorio se envia al contexto Docker.
+
+        El .dockerignore Se utiliza para excluir ficheros que no se utilizan y que no queremos que formen parte de nuestra imagen
+        de este modo la construccion de la imagen sera mas rapida.
+
+
+         
+
+
+
+    
+
+
+

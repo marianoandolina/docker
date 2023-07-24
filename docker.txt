@@ -1,0 +1,57 @@
+DOCKER
+
+Que es DOCKER?
+
+    Es una herramienta que permite desplegar aplicaciones en contenedores de forma rapida y protable.
+    Podemos llamarlas aplicaciones de bolsillo
+
+    Por ejemplo, podemos crear un apache con un solo comando:
+        $ docker run -d -p -8080:80 --name apache httpd
+
+ARQUITECTURA Y COMPONENTES (compolementar con imagen del mismo nombre)
+
+    --> Docker Host: Es la maquina donde va a correr el docker.
+    --> Docker CLI: Es el cliente con el que a traves de comandos vamos a manejar docker, "comando docker", con este podemos
+            manejar contenedores, imagenes, volumenes y redes.
+    --> Rest Api: Es una api para poder manejar docker mediante peticiones GET O POST, por ejemplo "docker ps" es GET/containers/json , ideal para Jenkins.
+    --> Docker Daemon: Es el demonio que presta servicio de Docker, "el servidor".
+
+LOS CONTENEDORES
+
+    Son procesos que corren sobre la maquina, esto ocupa muchos menos recursos que levantar una maquina virtual completa sobre nuestra maquina para 
+    correr una aplicacion.
+    Son otra capa adicional donde se van a ejecutar las imagenes, es decir, es donde van a correr nuestras imagenes
+
+Contiene:
+
+    --> Imagenes 
+    --> Volumenes 
+    --> Redes 
+
+    IMPORTANTE: SON DE LECTURA Y ESCRITURA PERO LOS CAMBIOS SON TEMPORALES. SALVO QUE HAGAMOS LAS MODIFICACIONES PERMANENTES MEDIANTE VOLUMENES.
+
+
+IMAGENES 
+
+    Es un paquete que contiene toda la informacion necesaria para que una aplicacion se pueda ejecutar.
+    Una imagen esta compuesta por capas, por ejemplo:
+    --> FROM 
+    --> RUN 
+    --> CMD 
+
+    IMPORTANTE: LAS IMAGENES SON DE SOLO LECTURA, NO SE PUEDEN MODIFICAR.
+
+REDES 
+
+    Es la forma en que vamos a poder acceder al contenedor y la forma en que los contenedores se van a comunicar entre si.
+
+    TIPOS:
+
+    --> BRIDGE
+    --> HOST 
+    --> NONE 
+
+DOCKER HUB (https://hub.docker.com/)
+
+    Es el lugar donde se encuentran todas las imagenes oficiales y creadas por usuarios de Docker.
+
