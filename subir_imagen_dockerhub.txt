@@ -1,0 +1,25 @@
+PASOS PARA SUBIR UNA IMAGEN A DOCKER HUB
+
+Nos logueamos con el siguiente comando:
+    >>> docker login
+Nos va a pedir el usuario y la contraseña.
+
+Luego tenemos que Tagear la imagen que quarramos subir, es decir, colocarle una etiqueta con el comando "docker tag"
+
+La estructura quedaria asi:
+    >>> docker tag <nombre de la imagen en nuestra pc>:<version de la imagen> <nombre de usuario dockerhub>/<nombre a identificar en dockerhub>:<version a identificar>
+
+El comando seria asi:
+    >>> docker tag app-python:latest mariano1983doker/app-python:latest
+
+Por ultimo realizamos el push al repositorio de docker
+    >>> docker push mariano1983doker/app-python:latest
+
+Podemos volver a descargar la imagen si no la borramos de nuestra pc
+El comando para volver a descargar la imagen es:
+El nombre y la version de la imagen son tal cual estan en dockerhub
+
+    >>> docker pull <nombre de la imagen>:<version>
+    
+
+
