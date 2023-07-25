@@ -1,0 +1,10 @@
+DOCKERIGNORE
+
+#       Usamos este archivo que se va a llamar .dockerignore para decirle que archivos queremos que ignore
+#   que se encuentran en nuestra carpeta donde esta el dockerfile.
+
+#       Colocamos el .dockerignore en el mismo directorio que tenemos el dockerfile.
+
+
+
+
