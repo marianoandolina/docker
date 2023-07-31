@@ -1,0 +1,20 @@
+VOLUMENES 
+
+    HOST
+        Se mapea un directorio donde del docker host al directorio donde la aplicacion guarda los datos en el contenedor
+        De este modo cualquier informacion que la app guarde en el directorio del contenedor tambien se guardara en el docker host
+
+        Este volumen no se borra con el comando 
+        >>> docker rm -fv <contendedor>
+
+        Se suele utilizar para configuraciones propias, si tenemos un archivo de configuracion y queremos sustituir otro.
+
+    ANONIMOS
+        Los volumenes anonimos se guardan automaticamente en un directorio predefinido por docker con un nombre aleatorio
+    
+    NOMBRADOS
+        
+
+
+
+        *** PRACTICAR Y PROFUNDIZAR PORQUE NO ME QUEDO TAN CLARO ***

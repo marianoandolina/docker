@@ -1,0 +1,108 @@
+CONTENEDORES
+
+    Un contenedor es donde se van a ejecutar nuestras imagenes, se puede modificar su contenido pero los cambios son temporales.
+
+COMANDOS IMPORTANTES
+
+    >>> docker ps
+        Nos permite ver los contenedores en ejecucion
+    >>> docker ps -a 
+        Nos permite ver todoso los contenedores, los que estan en ejecucion y los que estan detenidos
+    >>> docker ps -l
+        Te muestra el ultimo contenedor que creaste
+    >>> docker run
+        Se utiliza para crear un contenedor, se le pueden pasar varios argumentos, los mas usados son:
+
+        --name = Indica un nombre para el contenedor
+        -d = Correr el contenedor en segundo plano
+        -p = Expone un puerto
+        -e = Crea variables de entorno en el contenedor
+        --network = Indicarle una red al contenedor, por defecto es bridge
+        --ip = Asignar una ip al contenedor
+        --hostname = Indica un nombre para el contenedor
+        --memory = Establece limite de memoria para el contenedor
+        --cpuset-cpus = Limita el numero de cpus que puede usar el contenedor
+        stats = Vemos los recursos que esta consumiendo y los que tiene permitido consumir el contenedor
+            A partir de los stats (USO DE MEMORIA, CPU, RED, ETC) vamos a determinar si le limitamos el uso de estos recursos con los argumentos antes mencionados
+    >>> dokcer rename
+        Para renombrar el contenedor creado
+
+        Estructura del comando 
+        
+        docker rename <nombre del contenedor a renombrar> <nuevo nombre>    
+
+        Ejemplo de rename
+
+        docker rename nginx nginx_especial
+    >>> docker stop/start/restart
+        Como lo indica el nombre es un comando para parar(STOP), reiniciar(RESTART) o iniciar (START)
+        La diferencia entre START Y RUN es que STAR solo arranca un contenedor ya creado y RUN crea el contenedor y lo arranca
+        
+        docker stop <nombre del contendedor>
+        docker start <nombre del contendedor>
+        docker restart <nombre del contendedor>
+    >>> docker rm 
+        Borra el contenedor si esta detenido
+        -f = Detiene el contenedor y lo borra 
+        -v = Borra los volumenes asociados
+        -i = Elimina los links del contenedor
+    >>> docker exec
+        Permite ejecutar comandos dentro de un contenedor e incluso entrar en el si se le pasa un it y shell
+
+        Estructura
+
+        docker exec <contedor> <comando>
+
+        Etrar al contenedor
+
+        docker exec -it <contenedor> bash 
+    >>> docker logs
+        Permite ver los eventos que sucedieron en el contenedor
+
+        -f = Permite verlos en tiempo real commo un tail -200f.
+        -t = Agrega timestamp al log
+    >>> docker inspect
+        Sirve para ver toda la configuracion interna del contenedor
+
+        docker inspect <nombre del contenedor>
+        
+   Ejemplo de comando para crear contenedor
+
+        ** Los contenedores no pueden llevar la misma direccion ip
+        ** Los contenedores no pueden tener el mismo nombre
+
+        docker run -d -p 8080:80 --name nginx nginx
+
+            En este caso creamos el contenedor <docker run> en segundo plano <-d> exponiendo el siguiente puero <-p> con el siguiente nombre <--name>
+            El ultimo nginx es el nombre de la imagen que tiene que descargar para crear el contenedor si es que la imagen no existe de forma local
+
+        docker run -d -p 8081:80 -e NOMBRE=MARIANO --name nginx_vars nginx
+
+            Le agregamos una variable de entorno con el comando <-e> (se pueden agregar la cantidad de variables de entorno que queramos)
+            Las variables de entorno se pueden usar para pasar un usuario y contraseña a los contenedores que lo requieran etc. 
+
+        docker run -d -p 8082:80 -e NOMBRE=MARIANO --name nginx-memory --memory 200m nginx
+
+            Limitamos el uso de la memoria para este contendor a 200 megas
+
+        docker run -d -p 8083:80 -e NOMBRE=MARIANO --name nginx-cpu_limit --cpuset-cpu 0 200m nginx
+
+            Limitamos el uso de cpus por parte del contenedor
+            El numero pasado en este ejemplo para limitar el cpu es el 0 porque la cantidad de cpus que tenemos en la pc se manejan como si fuera una lista entonces 
+            si el primer cpu de la lista es el que se encuentra en el indice 0, en este caso es el unico que tiene permitido usar este contendedor
+
+    Ingresar a un contenedor
+
+        Estructura del comando para ingresar al contenedor:
+            docker exec -it <nombre del contenedor> <consola a ejecutar (bash o shell)>
+
+                -i = Indica que sea interactivo
+                -t = Indica que abra una consola para tipear cuando ejecutamos el contenedor
+        
+        Ejemplo de comando para ingresar al contenedor:
+            docker exec -it nginx bash
+
+    Comandos dentro del contenedor
+
+        env = Sirve para ver las variables de entorno
+        exit = Sale del contenedor

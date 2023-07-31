@@ -22,13 +22,13 @@ LOS CONTENEDORES
     correr una aplicacion.
     Son otra capa adicional donde se van a ejecutar las imagenes, es decir, es donde van a correr nuestras imagenes
 
-Contiene:
+    Contienen:
 
-    --> Imagenes 
-    --> Volumenes 
-    --> Redes 
+        --> Imagenes 
+        --> Volumenes 
+        --> Redes 
 
-    IMPORTANTE: SON DE LECTURA Y ESCRITURA PERO LOS CAMBIOS SON TEMPORALES. SALVO QUE HAGAMOS LAS MODIFICACIONES PERMANENTES MEDIANTE VOLUMENES.
+        IMPORTANTE: SON DE LECTURA Y ESCRITURA PERO LOS CAMBIOS SON TEMPORALES. SALVO QUE HAGAMOS LAS MODIFICACIONES PERMANENTES MEDIANTE VOLUMENES.
 
 
 IMAGENES 

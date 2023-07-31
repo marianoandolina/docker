@@ -1,0 +1,9 @@
+REDES EN DOCKER
+    Es la forma en la que vamos a poder acceder al contenedor y se van a comunicar los contenedores entre si
+    Hay 5 tipos de driver
+
+TIPOS DE DRIVERS
+    
+    BRIDGE
+        Es el tipo de driver por defecto, se utiliza para comunicar contenedores en el mismo docker host.
+        La puerta de enlace de esta red es la interfaz docker0 que se crea en la instalacion de docker.

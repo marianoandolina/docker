@@ -7,7 +7,7 @@ Nos va a pedir el usuario y la contraseña.
 Luego tenemos que Tagear la imagen que quarramos subir, es decir, colocarle una etiqueta con el comando "docker tag"
 
 La estructura quedaria asi:
-    >>> docker tag <nombre de la imagen en nuestra pc>:<version de la imagen> <nombre de usuario dockerhub>/<nombre a identificar en dockerhub>:<version a identificar>
+    >>> docker tag <nombre de la imagen en nuestra pc>:<version de la imagen> <nombre de usuario dockerhub>/<nombre a identificar en la imagen en dockerhub>:<version a identificar>
 
 El comando seria asi:
     >>> docker tag app-python:latest mariano1983doker/app-python:latest
@@ -21,5 +21,4 @@ El nombre y la version de la imagen son tal cual estan en dockerhub
 
     >>> docker pull <nombre de la imagen>:<version>
     
-
 
