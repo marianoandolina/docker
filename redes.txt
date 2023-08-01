@@ -4,6 +4,35 @@ REDES EN DOCKER
 
 TIPOS DE DRIVERS
     
+    COMANDOS IMPORTANTES
+        ping: Permite verificar la coneccion entre contenedores
+              Desde dentro del contenedor hacemos un ping al contenedor que queremos saber si esta conectado
+
+            $ docker ping <ip>
+
     BRIDGE
         Es el tipo de driver por defecto, se utiliza para comunicar contenedores en el mismo docker host.
         La puerta de enlace de esta red es la interfaz docker0 que se crea en la instalacion de docker.
+        Esta red es la red que se asigna por defecto.
+        No se puede hacer ping entre los contenedores por su nombre, si no que tenemos que colocar la direccion IP.
+
+    REDES CREADAS
+        Son las redes que creamos nosotros a las que le asignamos nombre, subnet, gateway como minimo, se le pueden indicar mas cosas.
+        El gateway es el ip de la puerta de enlace por el cual se van a comunicar los contenedores asociados a esa red.
+
+        Estructura
+
+            docker network create <nombre de la red> --subnet <ip subnet> --gateway <ip gateway>
+
+        Ejemplo
+
+            $ docker network create mariano-net --subnet 192.168.0.0/24 --gateway 192.168.0.1
+
+        Este comando crea la red y luego para asociar los diferentes contenedores a esa red lo hacemos con el comando --network al momento de crearlos
+
+        Ejemplo
+
+            $ docker run -d --network mariano-red nginx
+
+            
+

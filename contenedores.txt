@@ -17,7 +17,7 @@ COMANDOS IMPORTANTES
         -d = Correr el contenedor en segundo plano
         -p = Expone un puerto
         -e = Crea variables de entorno en el contenedor
-        --network = Indicarle una red al contenedor, por defecto es bridge
+        --network = Asociar una red al contenedor, por defecto es bridge
         --ip = Asignar una ip al contenedor
         --hostname = Indica un nombre para el contenedor
         --memory = Establece limite de memoria para el contenedor
