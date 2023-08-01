@@ -27,12 +27,19 @@ TIPOS DE DRIVERS
         Ejemplo
 
             $ docker network create mariano-net --subnet 192.168.0.0/24 --gateway 192.168.0.1
-
+        
         Este comando crea la red y luego para asociar los diferentes contenedores a esa red lo hacemos con el comando --network al momento de crearlos
 
         Ejemplo
 
             $ docker run -d --network mariano-red nginx
 
+        Tambien podemos asignarle una ip propia al contenedor con el comando --ip
+
+        Ej
+            $ docker run -d --network mariano-red --ip 192.168.0.10 nginx
+
             
+
+
 
