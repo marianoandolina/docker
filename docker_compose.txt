@@ -1,0 +1,23 @@
+DOCKER COMPOSE (https://docs.docker.com/compose/)
+
+Es un herramienta que permite crear aplicaciones multicontenedor de una forma mucho mas sencilla y rapida
+Es un archivo .yaml que contiene toda la informacion de los contenedores
+Para la identacion tener en cuenta que los niveles padre esten al mismo nivel y los niveles hijos esten al mismo nivel.
+
+En el ejemplo vamos a crear una aplicacion Wordpress con base de datos Mysql
+
+Los niveles padres de la estructura del docker compose son:
+    version:
+    services:
+    volumes:
+    networks:
+
+ESTRUCTURA DEL docker-compose.yaml explicada
+
+    version: "3.8" # Colocamos la version de docker compose que vamos a utilizar.
+
+    services: 
+
+
+
+

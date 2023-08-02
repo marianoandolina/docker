@@ -9,6 +9,11 @@ TIPOS DE DRIVERS
               Desde dentro del contenedor hacemos un ping al contenedor que queremos saber si esta conectado
 
             $ docker ping <ip>
+        
+        ip a: Se utiliza para ver las interfaces de red activas
+    
+    OVERLAY
+        Este tipo de redes es para conectar contenedores que estan en diferentes docker host.
 
     BRIDGE
         Es el tipo de driver por defecto, se utiliza para comunicar contenedores en el mismo docker host.
@@ -38,6 +43,20 @@ TIPOS DE DRIVERS
 
         Ej
             $ docker run -d --network mariano-red --ip 192.168.0.10 nginx
+
+        CONECTAR REDES
+
+        Para conectar contenedores que estan en diferentes redes creadas usamos el comando connect 
+
+            Estructura 
+
+            docker network connect <nombre de red> <nombre de contenedor>
+
+            Ej:
+
+                docker network connect mariano-net oriana-net 
+
+
 
             
 
