@@ -1,0 +1,46 @@
+version: "3.8" # Colocamos la version de docker compose que vamos a utilizar.
+services: # servicios es igual a decir contenedores
+  dbwordpress: # nombre para identificar el servicio
+    container_name: wordpressdb # nombre del contenedor
+    image: mysql:5.7 # nombre de la imagen a utilizar con su respectiva etiqueta
+    environment: # configuramos las variables de entorno minimas que nos indica en la documentacion de la imagen
+      MYSQL_ROOT_PASSWORD: "123456" # contraseña root de la base de datos
+      MYSQL_DATABASE: wpdatabase # nombre de la base de datos
+      MYSQL_USER: wpuser # usuario de la base de datos
+      MYSQL_PASSWORD: "654321" # contraseña de la base de datos
+    volumes:  # los volumenes donde se va a persistir la informacion y configuracion de la base de datos
+      - "wordpress-data:/var/lib/mysql"     
+    networks: # la red a la que va a pertenecer el servicio/contenedor
+      - net_wordpress
+# el proximo servicio/contenedor a crear
+  webwordpress: # nombre del servicio 
+    container_name: wordpressweb # nombre del contenedor
+    image: wordpress:latest # imagen a utilizar con su respectiva etiqueta
+    ports: # puerto con el que se va a comunicar el afuera con el conteiner dentro
+      - "8090:80" 
+    environment: # variables de entorno minimas que nos indica la documentacion que tenemos que configurar
+      WORDPRESS_DB_HOST: wordpressdb # este es el nombre de la base de datos (nombre del contenedor linea 4)
+      WORDPRESS_DB_USER: wpuser # nombre de usuario para la base de datos (usuario de base de datos linea 9)
+      WORDPRESS_USER_PASSWORD: "654321" # contraseña de la base de datso (linea 10)
+      WORDPRESS_DB_NAME: wpdatabase # nombre de la base de datos (linea 8)
+    volumes: # volumen donde se va a persistir la configuracion del servicio
+      - "wordpress-web:/var/www/html" 
+    networks: # red a la cual va a pertenecer el servicio
+      - net_wordpress 
+    depends_on: # le indicamos que no puede funcionar sin el siguiente servicio
+      - dbwordpress # servicio del cual depende (nombre del servicio de la base de datos)
+volumes: # creamos los volumenes que mencionamos en cada uno de los servicios
+  wordpress-data: # nombre del volumen donde persiste el servicio/contenedor de la base de datos
+  wordpress-web: # nombre del volumen donde persiste el servicio/contenedor de wordpress
+
+networks: # creamos la red a la que van a pertenecer los servicios
+  net_wordpress: # nombre de la red a la que van a pertenecer los servicios
+
+# para ejecutar este archivo nos paramos en la carpeta donde se encuentra y ejecutamos el siguiente comando:
+
+  #  $ docker-compose up -d
+
+  # el -d indica que se va a ejecutar en segundo plano.
+
+
+

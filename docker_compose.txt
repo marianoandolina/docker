@@ -13,10 +13,78 @@ Los niveles padres de la estructura del docker compose son:
     networks:
 
 ESTRUCTURA DEL docker-compose.yaml explicada
+    
+    # Colocamos la version de docker compose que vamos a utilizar.
+    version: "3.8" 
 
-    version: "3.8" # Colocamos la version de docker compose que vamos a utilizar.
 
     services: 
+        # Los servicios son los contenedores que van ser parte de nuestro proyecto.
+        # En este caso necesitamos una data base
+
+        dbwordpress:
+            # Damos un nombre al contenedor
+
+            container_name: wordpressdb
+
+            # Imagen a utilizar en formato <nombre de hub de docker>:<tag hub>
+
+            image: mysql:5.7
+
+            # Configuramos las variables de entorno para la base de datos
+            # Estas variables de entornos son las que pide la imagen que hay que configurar, esta informacion esta en la descripcion de la imagen en dockerhub.
+
+            environment:
+                MYSQL_ROOT_PASSWORD: "123456"
+                MYSQL_DATABASE: wpdatabase
+                MYSQL_USER: wpuser
+                MYSQL_PASSWORD: "654321"
+
+            # Creamos el volumen donde el contenedor va a persistir la informacion de la base de datos.
+            # Esta informacion tambien se encuentra en la documentacion de la imagen (docker hub).
+
+            volumes: 
+                - "wordpress-data: /var/lib/mysql"
+            
+            # creamos la red en la que van a estar conectados los contenedores del proyecto
+
+            networks: 
+                - net_wordpress
+        
+        # El siguiente contenedor o servicio que tenemos que crear es el Wordpress en si mismo.
+
+        webworpress:
+            container_name: wordpressweb # le damos un nombre al contenedor
+            image: wordpress:latest  # la imagen a utilizar para crear el contenedor
+
+            ports: 
+                -"8090:80" # el puerto por donde se va a conectar 
+            # configuramos ahora las variables de entorno
+
+            environment:
+                #   todos las variables de entorno que pasamos a continuacion para configurar la base de datos de wordpress esta directamonte
+                #   relacionado con el contenedor creado primero de la base de datos Mysql.
+
+                WORDPRESS_DB_HOST: wordpressdb # esta es la db que vamos a usar entonces le pasamos el nombre del contenedor de la database que creamos primero
+                WORDPRESS_DB_USER: wpuser # el nombre de usuario para acceder a la base de datos
+                WORDPRESS_USER_PASSWORD: # el password para acceder a la base de datos
+                WORDPRESS_DB_NAME: wpdatabase
+
+            # creamos el volumen donde la configuracion de este servicio/contenedor va a aser persistida
+            volumes:
+                - "wordpress-web:/var/www/html" # esta informacion se encuentra en la doc de la imagen oficial de wordpress o la que vayamos a usar para crear el contenedor
+            networks:
+                - net_wordpress # para conectarlo a la base de datos tenemos que ponerlo en la misma red.
+            depends_on: # este comando hace dependiente el servicio / contenedor webworpress de la base de datos, es decir hasta que el contenedor de la base de datos no este funcionando, este contenedor no puede funcionar.
+                db_wordpress
+
+    volumes:
+        # en este comando creamos los volumenes que antes hemos mencionado en los respectivos servicios
+        wordpress-web
+        wordpress-data
+
+    networks:
+        net_wordpress
 
 
 
